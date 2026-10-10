@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>منصة المقارنة بين تقريرين</title>
+<title>تقارير هيئة التقويم</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Cairo:wght@400;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
 <style>
 /* ==========================================================
-   منصة المقارنة بين تقريرين — تصميم أسماء الباتلي
+   تقارير هيئة التقويم — تصميم أسماء الباتلي
    لوحة مضيئة: بنفسجي + سماوي + كهرماني على خلفية لؤلؤية
    ========================================================== */
 :root{
@@ -298,7 +298,7 @@ td.bgup{background:var(--upbg)}td.bgdown{background:var(--downbg)}
   <div class="top">
     <div class="ico">⚖️</div>
     <div class="txt">
-      <h1>منصة المقارنة بين تقريرين</h1>
+      <h1>تقارير هيئة التقويم</h1>
       <div class="sub">التقرير العام (الخارجي) &nbsp;·&nbsp; التقرير الداخلي (الذاتي)</div>
     </div>
     <div class="pills">
@@ -1479,7 +1479,7 @@ function buildPrint(){
   const c=compare();const el=$('#printInner');if(!c){el.innerHTML='';return false;}
   const pb=(v,max,col)=>'<span class="pbar" style="width:'+(v==null?0:Math.max(1,Math.min(100,v/max*100)))+'%;background:'+col+'"></span>';
   let h=clicheHTML();
-  h+='<div class="p-title">مقارنة بين تقريرين — '+esc(TYPES[c.type])+'</div>';
+  h+='<div class="p-title">تقارير هيئة التقويم — '+esc(TYPES[c.type])+'</div>';
   const schools=[c.A.school,c.B.school].filter(Boolean);const sc=[...new Set(schools)].join(' / ');
   h+='<div class="p-sub">'+(sc?esc(sc)+' · ':'')+'«'+esc(labelOf('A'))+'» مقابل «'+esc(labelOf('B'))+'» · '+esc(hijriToday())+'</div>';
   h+='<table class="pt"><tr><td style="text-align:center"><b>'+N(c.cmp.length)+'</b> بنود مقارنة</td><td style="text-align:center;color:#059669"><b>▲ '+N(c.up.length)+'</b> '+terms(c).kUp+'</td><td style="text-align:center;color:#e11d48"><b>▼ '+N(c.down.length)+'</b> '+terms(c).kDown+'</td><td style="text-align:center"><b>● '+N(c.same.length)+'</b> '+terms(c).kSame+'</td></tr></table>';
@@ -1661,7 +1661,7 @@ function openPrintPage(){ // صفحة مستقلة تحوي ورقة المقا�
   if(!prepPrint()){toast('استورد التقريرين أولًا');return;}
   const css=[...document.querySelectorAll('style')].map(x=>x.textContent).join('\n');
   const inner=$('#printInner');
-  const html='<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>مقارنة بين تقريرين</title><style>'+css+'\nbody{background:#f4f1ff;margin:0;padding:14px}#printSheet{position:static!important;visibility:visible!important;pointer-events:auto;z-index:auto;box-sizing:content-box;width:600px;margin:0 auto;padding:18px;box-shadow:0 4px 18px rgba(0,0,0,.12)}#printInner{width:100%!important}.pbar-top{max-width:640px;margin:0 auto 10px;text-align:center}.pbar-top button{margin:0 4px;font-family:inherit;font-size:16px;font-weight:700;border:0;border-radius:10px;padding:9px 22px;background:#5b21b6;color:#fff;cursor:pointer}@media print{body{background:#fff;padding:0}#printSheet{box-shadow:none;padding:0;width:auto}.pbar-top{display:none!important}}</style></head><body data-print-cliche="'+(state.settings.printCliche?'on':'off')+'"><div class="pbar-top"><button id="dl">🖨️ طباعة (تنزيل الملف)</button><button id="wd" style="background:#06b6d4">📝 تصدير وورد</button><div id="msg" style="font-size:13px;color:#555;margin-top:6px"></div></div><div id="printSheet"><div id="printInner" style="font-size:'+inner.style.fontSize+'">'+inner.innerHTML+'</div></div><scr'+'ipt>'+document.getElementById('h2cLib').textContent.replace(/<\/script/gi,'<\\/script')+'</scr'+'ipt><scr'+'ipt>'+sheetToPdf.toString()+';'+sheetToDocx.toString()+';document.getElementById("wd").onclick=function(){var m=document.getElementById("msg");try{sheetToDocx(document.getElementById("printInner"),"مقارنة-بين-تقريرين.docx");m.textContent="نُزّل ملف وورد.";}catch(e){m.textContent="تعذّر التصدير: "+(e&&e.message||e);}};'+';document.getElementById("dl").onclick=function(){var b=this,m=document.getElementById("msg");b.disabled=true;m.textContent="جارٍ إنشاء الملف…";sheetToPdf(document.getElementById("printInner"),"مقارنة-بين-تقريرين.pdf").then(function(){m.textContent="نُزّل ملف المقارنة؛ افتحه واطبعه.";}).catch(function(e){m.textContent="تعذّر إنشاء الملف: "+(e&&e.message||e);}).finally(function(){b.disabled=false;});};</scr'+'ipt></body></html>';
+  const html='<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>تقارير هيئة التقويم</title><style>'+css+'\nbody{background:#f4f1ff;margin:0;padding:14px}#printSheet{position:static!important;visibility:visible!important;pointer-events:auto;z-index:auto;box-sizing:content-box;width:600px;margin:0 auto;padding:18px;box-shadow:0 4px 18px rgba(0,0,0,.12)}#printInner{width:100%!important}.pbar-top{max-width:640px;margin:0 auto 10px;text-align:center}.pbar-top button{margin:0 4px;font-family:inherit;font-size:16px;font-weight:700;border:0;border-radius:10px;padding:9px 22px;background:#5b21b6;color:#fff;cursor:pointer}@media print{body{background:#fff;padding:0}#printSheet{box-shadow:none;padding:0;width:auto}.pbar-top{display:none!important}}</style></head><body data-print-cliche="'+(state.settings.printCliche?'on':'off')+'"><div class="pbar-top"><button id="dl">🖨️ طباعة (تنزيل الملف)</button><button id="wd" style="background:#06b6d4">📝 تصدير وورد</button><div id="msg" style="font-size:13px;color:#555;margin-top:6px"></div></div><div id="printSheet"><div id="printInner" style="font-size:'+inner.style.fontSize+'">'+inner.innerHTML+'</div></div><scr'+'ipt>'+document.getElementById('h2cLib').textContent.replace(/<\/script/gi,'<\\/script')+'</scr'+'ipt><scr'+'ipt>'+sheetToPdf.toString()+';'+sheetToDocx.toString()+';document.getElementById("wd").onclick=function(){var m=document.getElementById("msg");try{sheetToDocx(document.getElementById("printInner"),"مقارنة-بين-تقريرين.docx");m.textContent="نُزّل ملف وورد.";}catch(e){m.textContent="تعذّر التصدير: "+(e&&e.message||e);}};'+';document.getElementById("dl").onclick=function(){var b=this,m=document.getElementById("msg");b.disabled=true;m.textContent="جارٍ إنشاء الملف…";sheetToPdf(document.getElementById("printInner"),"مقارنة-بين-تقريرين.pdf").then(function(){m.textContent="نُزّل ملف المقارنة؛ افتحه واطبعه.";}).catch(function(e){m.textContent="تعذّر إنشاء الملف: "+(e&&e.message||e);}).finally(function(){b.disabled=false;});};</scr'+'ipt></body></html>';
   const url=URL.createObjectURL(new Blob([html],{type:'text/html'}));
   const w=window.open(url,'_blank');if(!w){const a=document.createElement('a');a.href=url;a.target='_blank';a.rel='noopener';document.body.appendChild(a);a.click();a.remove();}
 }
