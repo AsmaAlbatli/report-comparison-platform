@@ -789,6 +789,7 @@ function evVersion(codes){
 }
 function evKind(t){const c=compact(t);return /الخارج/.test(c)?'خارجي':(/الذا(تي|يت)/.test(c)?'ذاتي':'');}
 function evCycle(t){const m=fixWords(t).match(/دورة التقويم\s+(\S+)/);return m?'الدورة '+m[1]:'';}
+function mkLabel(kind,cycle,year){var kh='\u0630\u0627\u062a\u064a';var cyc=(kind===kh)?'':(cycle||year);return [kind,cyc].filter(Boolean).join(' \u2014 ');}
 function lvStrict(t){const m=String(t).match(/(?:^|\s)ال(تميز|تقدم|انطلاق|تهيئة)(?=\s|$|[.،:])/);return m?m[1]:'';}
 const DNAMES=[['الاداره','المدرسيه'],['التعليم','والتعلم'],['نواتج','التعلم'],['البيئه','المدرسيه']];
 function domPhrases(line){ // أسماء المجالات الواردة في سطر مع مواضعها
@@ -806,7 +807,7 @@ function parseEvalText(doc){
   const meta={school:schoolFromHeader(L),label:''};
   let kind='',cycle='',year='';
   for(const l of L.slice(0,14)){if(!kind)kind=evKind(l.t);if(!cycle)cycle=evCycle(l.t);if(!year){const m=l.t.match(/للعام\s+(\d{4})/);if(m)year=m[1]+'م';}}
-  meta.label=[kind,cycle||year].filter(Boolean).join(' — ');
+  meta.label=mkLabel(kind,cycle,year);
   const idx=(re,from)=>{for(let i=from||0;i<L.length;i++)if(re.test(compact(L[i].t)))return i;return -1;};
   const pctTok=l=>l.tokens.map(t=>{const n=numOf(t.t);return n&&n.pct?Object.assign({v:n.v},t):null;}).filter(Boolean);
   const iDom=idx(/^اداءالمدرسهوفقالمجالات/),iStd=idx(/^اداءالمدرسهوفقالمعاي/),iInd=idx(/^اداءالمدرسهوفقالم[وؤ](رش|شر)ات/);
@@ -988,7 +989,7 @@ async function parseEvalImage(doc,onProg){
     try{onProg('قراءة بيانات المدرسة…');const wa=await Tesseract.createWorker(['ara']);const {data}=await wa.recognize(top);await wa.terminate();
       const ls=(data.text||'').split('\n').map(normText).filter(Boolean);let kind='',cyc='';
       ls.forEach(t=>{if(!kind)kind=evKind(t)||(/الذا/.test(t)?'ذاتي':'');if(!cyc)cyc=evCycle(t);const k=t.indexOf('الرقم الوزاري');if(k>0&&!meta.school)meta.school=t.slice(0,k).replace(/[|:.\-]+$/,'').trim();});
-      meta.label=[kind,cyc].filter(Boolean).join(' — ');
+      meta.label=mkLabel(kind,cyc,"");
     }catch(e){}
   }
   return {rows:evalRows(o),warn,meta,ver};
